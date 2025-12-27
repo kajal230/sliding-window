@@ -1,0 +1,29 @@
+class Solution {
+public:
+    string minWindow(string s, string t) {
+     int n = s.size(), m = t.size();
+        if (m > n) return "";
+
+        vector<int> hash(128, 0);
+        for (char c : t) hash[c]++;
+
+        int cnt = 0, minLen = INT_MAX, start = 0;
+        int l = 0;
+
+        for (int r = 0; r < n; r++) {
+            if (--hash[s[r]] >= 0) cnt++;
+
+            while (cnt == m) {
+                if (r - l + 1 < minLen) {
+                    minLen = r - l + 1;
+                    start = l;
+                }
+
+                if (++hash[s[l]] > 0) cnt--;
+                l++;
+            }
+        }
+
+        return minLen == INT_MAX ? "" : s.substr(start, minLen);
+    }
+};
