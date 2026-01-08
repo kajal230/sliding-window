@@ -1,0 +1,16 @@
+class Solution {
+public:
+    bool queryString(string s, int n) {
+        for(int i=n; i>=1; i--){
+            string bin="";
+            int num=i;
+            while(num>0){
+                bin=char('0'+num%2)+bin;
+                num/=2;
+            }
+            if(s.find(bin)==string::npos)
+            return false;
+        }
+        return true;
+    }
+};
