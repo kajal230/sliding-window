@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int minimumRecolors(string blocks, int k) {
+        int n=blocks.size();
+        int cnt=0;
+        
+        for(int i=0; i<k; i++){
+            if( blocks[i]!='B'){
+                cnt++;
+            }
+        }
+        int mincnt=cnt;
+         for(int j=k; j<n; j++){
+            if( blocks[j-k]!='B'){
+                cnt--;
+            }if( blocks[j]!='B'){
+                cnt++;
+           }
+            mincnt=min(mincnt,cnt);
+        }
+        return mincnt;
+    }
+};
